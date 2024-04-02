@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number systems generator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/generator.css">
+    <link rel="stylesheet" href="styles/calculator.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#generator">Generator</a></li>
+            <li><a href="#how">How it works?</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <h2>Welcome to the...</h2>
+        <h1>Number Systems Generator</h1>
+        <p>With any character & base-N</p>
+    </section>
+
+    <main id="generator">
+        <h2>Generator</h2>
+        <form id="numericSystemCreator">
+            <h4>Select the numeric <a href="#help-base" class="help">base</a></h4>
+            <input type="number" name="base" id="base" value="2" placeholder="2" required min=2>
+
+            <h4>Insert the <a href="#help-digits" class="help">digits</a> to use (any character)</h4>
+            <div id="gen-digits">
+                <div>
+                    <label for="digit-1" class="label-digit">Digit #0</label>
+                    <input type="text" name="digit-1" class="digits" id="digit-1" maxlength="2" required value="0">
+                    <button type="button" class="btn-delete-digit">Delete</button>
+                </div>
+
+                <div>
+                    <label for="digit-2" class="label-digit">Digit #1</label>
+                    <input type="text" name="digit-2" class="digits" id="digit-2" maxlength="2" required value="1">
+                    <button type="button" class="btn-delete-digit">Delete</button>
+                </div>
+            </div>
+            <button type="submit" id="btn-generate-system">Generate</button>
+        </form>
+        <div>
+
+        </div>
+    </main>
+
+    <section id="calculator" style="display: none;">
+        <div id="nav-calculator">
+            <h2>Calculator</h2>
+            <button id="return-generator"><img src="https://cdn-icons-png.flaticon.com/512/13/13964.png" alt="Return icon"></button>
+        </div>
+        <h4>Use your new number system</h4>
+        <div id="cal-dec-to-sys">
+            <h5>Decimal system to your <span class="title-base">2</span>-base system</h5>
+            <label for="input-decimal">Decimal number</label>
+            <input type="number" id="input-decimal" min="0" name="input-decimal" required>
+            <p id="converted-system">--</p>
+        </div>
+
+        <div id="cal-sys-to-dec">
+            <h5>Your <span class="title-base">2</span>-base system to decimal system</h5>
+            <label for="input-system">Generated system number</label>
+            <input type="text" id="input-system" name="input-system" required>
+            <p id="converted-decimal">--</p>
+        </div>
+    </section>
+
+    <section id="how">
+        <h2>How it works?</h2>
+
+        <p>Imagine you have a bunch of different symbols, like shapes or pictures. Now, let's say you want to use these symbols to represent how many things you have. That's what a number system is all about - it's like a special language we use to talk about numbers.</p>
+
+        <p>Think of the number system like different sets of rules for using these symbols. The most common one we use every day is called the decimal system, which has 10 symbols: 0, 1, 2, 3, 4, 5, 6, 7, 8, and 9. When we count past 9, we add another digit to the left, like going from 9 to 10.</p>
+
+        <p>But there are other number systems too, like binary (just 0s and 1s), octal (0 to 7), and hexadecimal (0 to 9 plus A to F). Each system has its own set of rules and symbols.</p>
+
+        <h3 id="help-base">Base</h3>
+
+        <p>The base of a number system determines how many different symbols (or digits) are used to represent numbers and how the value of each position changes as you move from right to left.</p>
+
+        <p>For example, in the decimal system, which is base 10, we have 10 digits (0 through 9), and each position represents a power of 10. So, in the number 123, the '1' represents 100 (10^2), the '2' represents 20 (10^1), and the '3' represents 3 (10^0).</p>
+
+        <p><span class="bold">Bases can be anything greater than 1</span>, and different bases have different properties that make them useful for different purposes. For instance, binary (base 2) is essential in computer science because it directly relates to how computers store and process
+            information.
+        </p>
+
+        <h3 id="help-digits">Digits</h3>
+
+        <p>Digits are the symbols used in a number system to represent quantities. In the decimal system, we have 10 digits (0 through 9), and each digit has a specific value depending on its position in the number.</p>
+
+        <p>Digits are crucial because they allow us to express any quantity by combining them in different ways. They provide a compact and efficient way of representing numbers, making arithmetic operations and other mathematical tasks much more manageable.</p>
+
+        <p>Together, bases and digits form the foundation of number systems, enabling us to count, measure, calculate, and communicate quantities and relationships in a structured and systematic manner.</p>
+
+        <h3>Conversion</h3>
+
+        <h4>Example 1</h4>
+
+        <p>Let's convert the decimal number 22 (our common number system) to binary (it's base-2, with the digits "0" and "1").</p>
+
+        <p>To do this, we divide 22 by 2 repeatedly, keeping track of the remainders until we reach 0.</p>
+
+        <table>
+            <thead>
+                <td>(Preview quotient / Base)</td>
+                <td>Quotient</td>
+                <td>Remainder</td>
+            </thead>
+            <tr>
+                <td>--</td>
+                <td>22</td>
+                <td>--</td>
+            </tr>
+            <tr>
+                <td>22/2</td>
+                <td>11</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>11/2</td>
+                <td>5</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>5/2</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2/2</td>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>1/2</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>--</td>
+                <td>0</td>
+                <td>--</td>
+            </tr>
+        </table>
+
+        <p>Now, let's read the remainders from bottom to top: 10110. So, the binary representation of 22 is 10110.</p>
+
+        <h4>Example 2</h4>
+
+        <p>To convert binary to decimal, you multiply each digit by 2 raised to the power of its position from right to left and then add up the results.</p>
+
+        <p>For example, let's convert the binary number 10110 to decimal:</p>
+
+        <table>
+            <thead>
+                <td>Binary</td>
+                <td>Exponent</td>
+                <td>Value</td>
+            </thead>
+            <tr>
+                <td>1</td>
+                <td>2⁴</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>2³</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2²</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2¹</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>2⁰</td>
+                <td>1</td>
+            </tr>
+        </table>
+
+        <p>Now, the value of each digit in order (0 in binary is 0 in decimal, and 1 in binary is 1 in decimal, but in other cases in can variate) is multiplied to each value in the column "Value". After that, each result is added together to get only one result:</p>
+
+        <p>(1 * 2⁴) + (0 * 2³) + (1 * 2²) + (1 * 2¹) + (0 * 2⁰) = <br> = 16 + 4 + 2 <br> = 22</p>
+
+        <p>So, the decimal representation of 10110 is 22.</p>
+
+        <p>This process can be applied to convert numbers between any two base.</p>
+    </section>
+
+    <footer>
+        <div>
+            <h5>Navigate to...</h5>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#generator">Generator</a></li>
+                <li><a href="#how">How it works?</a></li>
+            </ul>
+        </div>
+
+        <p>― Site developed by <a href="https://izakcancino.github.io" id="developer" target="_blank">Izak Cancino</a> ―</p>
+    </footer>
+
+    <script src="scripts/variables.js"></script>
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>
