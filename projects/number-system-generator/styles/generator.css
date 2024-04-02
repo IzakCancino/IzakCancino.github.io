@@ -1,0 +1,90 @@
+/* Generator section */
+
+#numericSystemCreator {
+    text-align: center;
+}
+
+#generator h2 {
+    padding-left: 30px;
+}
+
+#numericSystemCreator h4 {
+    padding-top: 15px;
+}
+
+#gen-digits {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#gen-digits div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+#gen-digits div>* {
+    margin: 10px;
+}
+
+.label-digit {
+    width: 90px;
+}
+
+.btn-delete-digit {
+    font-size: 12px;
+    color: white;
+    background-color: #a02e2e;
+    border: none;
+    border-radius: 10px;
+    box-shadow: #0000006c 3px 3px 3px;
+    padding: 10px 20px;
+    transition: all 100ms ease-in-out 0s;
+}
+
+.btn-delete-digit:hover {
+    box-shadow: inset #000000a8 3px 3px 3px;
+    background-color: #892828;
+}
+
+.btn-delete-digit:active {
+    box-shadow: inset #000000b5 3px 3px 3px;
+    background-color: #631919;
+}
+
+#btn-generate-system {
+    color: white;
+    background-color: #225b2e;
+    border: none;
+    border-radius: 10px;
+    box-shadow: #0000006c 3px 3px 3px;
+    margin: 30px 0px;
+    padding: 10px 40px;
+    transition: all 100ms ease-in-out 0s;
+}
+
+#btn-generate-system:hover {
+    box-shadow: inset #000000a8 3px 3px 3px;
+    background-color: #194c24;
+}
+
+#btn-generate-system:active {
+    box-shadow: inset #000000b5 3px 3px 3px;
+    background-color: #133a1c;
+}
+
+.blocked-input {
+    color: #c2c2c2 !important;
+    background-color: #2b2b2b !important;
+}
+
+.blocked-input:hover {
+    cursor: not-allowed;
+}
