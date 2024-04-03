@@ -1,0 +1,41 @@
+/* Media queries */
+
+@media only screen and (orientation: portrait) {
+    p {
+        padding: 10px 10px;
+    }
+
+    nav ul {
+        width: 100%;
+    }
+
+    #home h1 {
+        margin: 5px 0px;
+        font-size: 20px;
+    }
+
+    #home h2 {
+        margin: 0px;
+        font-size: 16px;
+    }
+
+    #home h3 {
+        margin: 20px 0px 0px 0px;
+        font-size: 19px;
+    }
+
+    #home p {
+        margin: 5px 0px;
+        font-size: 16px;
+    }
+
+    #calculator div {
+        width: 90%;
+    }
+
+    table {
+        width: 90%;
+        margin: 10px 5%;
+        font-size: 3vw;
+    }
+}
