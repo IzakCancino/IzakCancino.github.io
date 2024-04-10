@@ -149,6 +149,42 @@ html::-webkit-scrollbar-thumb {
     font-size: 26px;
 }
 
+/* Presets sub-section */
+
+#presets {
+    text-align: center;
+}
+
+#presets div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-presets {
+    width: 130px;
+    height: 35px;
+    margin: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: #0000006c 3px 3px 3px;
+    color: white;
+    background-color: #485c71;
+}
+
+.btn-presets:hover {
+    box-shadow: inset #000000a8 3px 3px 3px;
+    background-color: #354454;
+}
+
+.btn-presets:active {
+    box-shadow: inset #000000b5 3px 3px 3px;
+    background-color: #27313b;
+}
+
 /* Footer section */
 
 footer {
