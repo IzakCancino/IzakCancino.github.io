@@ -4,7 +4,7 @@
 
 ## 📌 Characteristics
 
--   **🧬 Generator:** Gives you the ability to select a base (_a positive integer_) for the number system, and based on it, you can input a character to represent each digit, these can be **ANY** valid Unicode character, like a letter, a number, an emoji, or a special character.
+-   **🧬 Generator:** Gives you the ability to select a base (_a positive integer_) for the number system, and based on it, you can input a character to represent each digit, these can be **ANY** valid Unicode character, like a letter, a number, an emoji, or a special character. Also, there are some presets that you can use, with common number systems.
 
 -   **🧮 Calculator:** Based on the previously generated number system, you can make conversions from decimal to your own system, and from your own system to decimal.
 
@@ -19,6 +19,8 @@ Try it on my website: [Number System Generator](https://izakcancino.github.io/pr
 ![Home section image](https://i.imghippo.com/files/hx8sN1712090291.png)
 
 ### Generator section
+
+*Below the section, there are some number system presets that you can try: Binary, Hexadecimal, Octal, and Emoji 😀*
 
 Here you have to input the numeric base of your own numeric system (it must be a positive integer greater or equal to 2).
 

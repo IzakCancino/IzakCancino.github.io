@@ -12,50 +12,21 @@
 updateDeleteBtns();
 
 // Detect when the selected numeric base in `inputBase` changes
-inputBase.addEventListener("change", () => {
-  if (base > inputBase.value) {
-    // The base decreased. Remove the number selected of digits selector 
-
-    while (base > inputBase.value) {
-      base--;
-      divGenDigits.removeChild(divGenDigits.lastElementChild);
-    }
-
-  } else if (base < inputBase.value) {
-    // The base increased. Add the number selected of digits selector 
-    while (base < inputBase.value) {
-      base++;
-      auxNumber++;
-
-      let templateGenDigits = document.createElement("div");
-      templateGenDigits.innerHTML = `
-                <label for="digit-${auxNumber}" class="label-digit">Digit #${base}</label>
-                <input type="text" name="digit-${auxNumber}" class="digits" id="digit-${auxNumber}" maxlength="2" required>
-                <button type="button" class="btn-delete-digit">Delete</button>
-              `;
-      divGenDigits.append(templateGenDigits);
-    }
-  }
-
-  btnsDeleteDigit = Array.from(document.getElementsByClassName("btn-delete-digit"));
-  updateDeleteBtns();
-
-  updateDigitsInfo();
-  inputsDigits[inputsDigits.length - 1].addEventListener("change", addDigitInputValidation);
-});
+inputBase.addEventListener("change", onInputBaseChange);
 
 // Adding to digit inputs validation of any character
 inputsDigits.forEach(input => {
-  input.addEventListener("change", addDigitInputValidation)
+  input.addEventListener("change", addDigitInputValidation);
 });
 
-// Generate the array with all the digits
+// Detect when the new number system is being generated
 formNumSys.addEventListener("submit", e => {
   e.preventDefault();
-  digits = inputsDigits.map(input => input.value);
 
   if (confirm("Note:\nYou will not be able to modify the actual number system (digits or base), at this moment. To do it, you need to click the return button in the calculator section.")) {
     // Prepare and show the `Calculator` section and move to it
+    sectionPresets.style.display = "none";
+
     titleBase.forEach(element => {
       element.innerText = base;
     });
@@ -63,9 +34,31 @@ formNumSys.addEventListener("submit", e => {
     sectionCalculator.style.display = "flex";
     toggleInputsOnGenerate(true);
     sectionCalculator.scrollIntoView({ behavior: "smooth" });
-  }
 
+    digits = inputsDigits.map(input => input.value);
+    regexValidation = new RegExp("^[" + digits.join("") + "]+$");
+    regexSplit = new RegExp(digits.join("{1}|") + "{1}", "g");
+  }
 });
+
+// Apply a preset number system to use it
+btnsPresets.forEach(btn => {
+  btn.addEventListener("click", () => {
+    let preset = presets[btn.id];
+    inputBase.value = preset.base;
+    onInputBaseChange();
+
+    inputsDigits.forEach((input, i) => {
+      input.value = preset.digits[i];
+      input.addEventListener("change", addDigitInputValidation);
+    })
+
+    sectionGenerator.scrollIntoView({ behavior: "smooth" });
+
+    window.alert("Preset applied successfully. Press the generate button to use it.");
+  });
+})
+
 
 
 /**
@@ -75,6 +68,7 @@ formNumSys.addEventListener("submit", e => {
 
 // Return to `Generator` section, move to it, and hide the `Calculator` section
 btnReturnGenerator.addEventListener("click", () => {
+  sectionPresets.style.display = "block";
   sectionCalculator.style.display = "none";
   toggleInputsOnGenerate(false);
   calDecimalToSystem["input-decimal"].value = "";
@@ -82,8 +76,7 @@ btnReturnGenerator.addEventListener("click", () => {
   calSystemToDecimal["input-system"].value = "";
   calSystemToDecimal["converted-decimal"].innerText = "--";
   sectionGenerator.scrollIntoView({ behavior: "smooth" });
-
-})
+});
 
 // Convert decimals numbers to system created numbers
 calDecimalToSystem["input-decimal"].addEventListener("change", () => {
@@ -100,10 +93,9 @@ calDecimalToSystem["input-decimal"].addEventListener("change", () => {
 
 // Convert system created numbers to decimal numbers
 calSystemToDecimal["input-system"].addEventListener("change", () => {
-  let re = new RegExp("^[" + digits.join("") + "]+$");
   let numSystem = calSystemToDecimal["input-system"].value;
 
-  if (!re.test(numSystem)) {
+  if (!regexValidation.test(numSystem)) {
     calSystemToDecimal["input-system"].value = digits[0];
     return;
   }
