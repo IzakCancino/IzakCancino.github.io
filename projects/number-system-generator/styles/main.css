@@ -136,6 +136,7 @@ html::-webkit-scrollbar-thumb {
 
 #home h2 {
     margin: 0px;
+    padding: 0px;
     font-size: 26px;
 }
 

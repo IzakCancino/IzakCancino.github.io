@@ -84,7 +84,8 @@ calDecimalToSystem["input-decimal"].addEventListener("change", () => {
 
   // Only allow positive integers
   if (numDecimal < 0 || !/^[0-9]+$/.test(numDecimal)) {
-    calDecimalToSystem["input-decimal"].value = 0;
+    calDecimalToSystem["input-decimal"].value = "";
+    calDecimalToSystem["converted-system"].innerText = "--";
     return;
   }
 
@@ -96,7 +97,8 @@ calSystemToDecimal["input-system"].addEventListener("change", () => {
   let numSystem = calSystemToDecimal["input-system"].value;
 
   if (!regexValidation.test(numSystem)) {
-    calSystemToDecimal["input-system"].value = digits[0];
+    calSystemToDecimal["input-system"].value = "";
+    calSystemToDecimal["converted-decimal"].innerText = "--";
     return;
   }
 
