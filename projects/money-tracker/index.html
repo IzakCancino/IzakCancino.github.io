@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Tracker — track every peso, keep every login to yourself</title>
+  <meta name="description" content="Money Tracker is a manual-entry personal finance app for Android. No bank linking, no cloud sync, no ads. Download the APK.">
+  <style>
+    :root {
+      --paper: #F4EFE1;
+      --paper-line: #CBBF9C;
+      --ink: #16302A;
+      --ink-soft: #3E5A4F;
+      --green: #2F6B4F;
+      --green-dark: #1F4A36;
+      --stamp: #A8452C;
+      --max: 640px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    html {
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      background-image:
+        repeating-linear-gradient(to bottom,
+          transparent 0px,
+          transparent 34px,
+          rgba(22, 48, 42, 0.07) 35px);
+      color: var(--ink);
+      font-family: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    a {
+      color: var(--green-dark);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--green-dark);
+      outline-offset: 3px;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- Header / hero ---------- */
+
+    header.hero {
+      padding: 56px 0 40px;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 46px;
+    }
+
+    .brand-mark .mono {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      line-height: 1.05;
+      margin: 0 0 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      max-width: 46ch;
+      color: var(--ink-soft);
+      margin: 0 0 36px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      background: var(--green);
+      color: var(--paper);
+      text-decoration: none;
+      padding: 16px 26px;
+      border: 2px solid var(--ink);
+      border-radius: 3px;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .btn-download:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .btn-download:active {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .btn-download .label {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: "Source Serif 4", Georgia, serif;
+    }
+
+    .btn-download .meta {
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      max-width: 30ch;
+    }
+
+    /* ---------- Ledger sections ---------- */
+
+    section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--paper-line);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 24px;
+      color: var(--ink);
+    }
+
+    .ledger {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ledger li {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--paper-line);
+    }
+
+    .ledger li:first-child {
+      border-top: none;
+    }
+
+    .ledger .check {
+      color: var(--green-dark);
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .ledger .item-title {
+      font-weight: 600;
+      margin: 0 0 3px;
+    }
+
+    .ledger .item-desc {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    /* ---------- Requirements ---------- */
+
+    .specs {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border: 1px solid var(--ink);
+    }
+
+    .specs .row {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      border-top: 1px solid var(--ink);
+    }
+
+    .specs .row:first-child {
+      border-top: none;
+    }
+
+    .specs dt,
+    .specs dd {
+      margin: 0;
+      padding: 12px 16px;
+    }
+
+    .specs dt {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      border-right: 1px solid var(--paper-line);
+      display: flex;
+      align-items: center;
+    }
+
+    .specs dd {
+      font-size: 0.95rem;
+    }
+
+    /* ---------- Install steps ---------- */
+
+    ol.steps {
+      margin: 0;
+      padding: 0 0 0 1.2em;
+    }
+
+    ol.steps li {
+      padding: 6px 0;
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer {
+      padding: 36px 0 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    footer .mono {
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+
+    .stamp {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: 12px;
+      padding: 6px 12px;
+      border: 2px solid var(--stamp);
+      color: var(--stamp);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      transform: rotate(-2deg);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 480px) {
+      .brand-mark {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .specs .row {
+        grid-template-columns: 1fr;
+      }
+
+      .specs dt {
+        border-right: none;
+        border-bottom: 1px solid var(--paper-line);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <header class="hero">
+      <div class="brand-mark">
+        <span class="mono">MONEY TRACKER</span>
+        <span class="mono">v1.0.0 · Android</span>
+      </div>
+
+      <h1>Every cent, tracked by hand — not by your bank.</h1>
+      <p class="tagline">
+        A manual-entry finance app: wallets, credit cards, budgets and
+        reports, all kept on your phone. No bank login, no cloud account,
+        no ads.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn-download" href="apks/MoneyTracker-v1.0.0.apk" download>
+          <span class="label">Download the APK</span>
+          <span class="meta mono">v1.0.0 · Android 8.0+</span>
+        </a>
+        <p class="cta-note">
+          Direct install, no accounts required.
+        </p>
+      </div>
+    </header>
+
+    <section>
+      <h2>What it does</h2>
+      <ul class="ledger">
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <p class="item-title">Wallets and credit cards, one true total</p>
+            <p class="item-desc">Track cash, bank accounts, and cards side by side. Everything rolls up into a single balance you can trust.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <p class="item-title">Due-date reminders that actually fire</p>
+            <p class="item-desc">Exact-alarm scheduling for credit card due dates, with a status check for the permissions that make notifications reliable.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <p class="item-title">Budgets, savings goals, and reports</p>
+            <p class="item-desc">Per-category budgets, per-wallet savings goals, and a dashboard with spending charts and custom date ranges.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <p class="item-title">PIN and fingerprint lock</p>
+            <p class="item-desc">The app locks on its own. Amounts stay masked by default until you tap to reveal them.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <p class="item-title">Your data stays yours</p>
+            <p class="item-desc">CSV export and import for backups, plus optional local and Google Drive backup. Nothing is sent anywhere else.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <p class="item-title">English and Español</p>
+            <p class="item-desc">Full translation, switchable in Settings independent of your phone's system language.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Requirements</h2>
+      <dl class="specs">
+        <div class="row">
+          <dt>Platform</dt>
+          <dd>Android 8.0 (API 26) or newer</dd>
+        </div>
+        <div class="row">
+          <dt>Account</dt>
+          <dd>None required — the app works fully offline</dd>
+        </div>
+        <div class="row">
+          <dt>Internet</dt>
+          <dd>Only used if you turn on Google Drive backup</dd>
+        </div>
+        <div class="row">
+          <dt>Cost</dt>
+          <dd>Free, no ads, no subscription</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section>
+      <footer>
+        <p class="mono">Money Tracker · com.izak.moneytracker</p>
+        <p class="mono">Manual entry only. No bank linking, ever.</p>
+        <p class="mono">Made with Claude Sonnet 5.</p>
+      </footer>
+    </section>
+
+  </div>
+
+</body>
+
+</html>
